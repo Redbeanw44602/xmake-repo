@@ -36,12 +36,16 @@ package("dobby")
             "-DNearBranch="                      .. xmake_option("near_branch"),
             "-DFullFloatingPointRegisterPack="   .. xmake_option("full_floating_point_register_pack")
         }
-        import("package.tools.cmake").install(package, configs)
+        table.insert(configs, "-DCMAKE_BUILD_TYPE=" .. (package:debug() and "Debug" or "Release"))
+        import("package.tools.cmake").install(package, configs, {buildir = "build"})
+        os.cp("include", package:installdir())
+        os.trycp("build/**.a", package:installdir("lib"))
+        os.trycp("build/**.so", package:installdir("lib"))
     end)
 
     on_test(function (package)
         assert(package:check_cxxsnippets({test = [[
-            void test () {
+            void test() {
                 DobbyGetVersion();
             }
         ]]}, {configs = {languages = "c++17"}, includes = "dobby.h"}))
