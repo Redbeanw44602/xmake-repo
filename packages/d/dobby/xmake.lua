@@ -2,10 +2,10 @@ package("dobby")
     set_description("a lightweight, multi-platform, multi-architecture hook framework.")
     set_license("Apache-2.0")
 
-    add_urls("https://github.com/LiteLDev/Dobby/archive/refs/tags/$(version).tar.gz",
-             "https://github.com/LiteLDev/Dobby.git")
+    add_urls("https://github.com/Redbeanw44602/Dobby/archive/refs/tags/$(version).tar.gz",
+             "https://github.com/Redbeanw44602/Dobby.git")
 
-    add_versions("v0.1.0", "37181f1bcffb120d1dcacbc33d0de2156bdd235290a78c62691e44c5d2bcb76c")
+    add_versions("v0.1.0", "94047e1243f22cc0f14de22279c0bb51558935e1d75674805e61970814369ef0")
 
     -- build
     add_configs("debug", {description = "Enable debug logging.", default = false, type = "boolean"})
