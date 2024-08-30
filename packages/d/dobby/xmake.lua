@@ -37,6 +37,7 @@ package("dobby")
             "-DFullFloatingPointRegisterPack="   .. xmake_option("full_floating_point_register_pack")
         }
         table.insert(configs, "-DCMAKE_BUILD_TYPE=" .. (package:debug() and "Debug" or "Release"))
+        table.insert(configs, "-DCMAKE_SYSTEM_PROCESSOR=" .. package:targetarch())
         import("package.tools.cmake").install(package, configs, {buildir = "build"})
         os.cp("include", package:installdir())
         os.trycp("build/**.a", package:installdir("lib"))
