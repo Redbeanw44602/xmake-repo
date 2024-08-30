@@ -1,5 +1,7 @@
 -- from: https://github.com/xmake-io/xmake-repo/blob/master/packages/l/lief/xmake.lua
 
+--- add new version.
+
 package("lief")
 
     set_homepage("https://lief.quarkslab.com")
