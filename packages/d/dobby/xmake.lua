@@ -6,6 +6,7 @@ package("dobby")
              "https://github.com/Redbeanw44602/Dobby.git")
 
     add_versions("v0.1.0", "94047e1243f22cc0f14de22279c0bb51558935e1d75674805e61970814369ef0")
+    add_versions("v0.1.1", "3f9dac8e0b252ab663947b5ca35475bb1550d3271e52c2d088ca2898e7be4ed2")
 
     -- build
     add_configs("debug", {description = "Enable debug logging.", default = false, type = "boolean"})
