@@ -48,5 +48,5 @@ package("dobby")
             void test() {
                 DobbyGetVersion();
             }
-        ]]}, {configs = {languages = "c++17"}, includes = "dobby.h"}))
+        ]]}, {configs = {languages = "c++11"}, includes = "dobby.h"}))
     end)
