@@ -22,7 +22,7 @@ package("dobby")
     add_configs("full_floating_point_register_pack", {description = "Enables saving and packing of all floating-point registers.", default = false, type = "boolean"})
 
     add_deps("cmake")
-    on_install("linux", "macosx", "cross", function (package)
+    on_install("linux", "macosx", function (package)
         function xmake_option(option)
             return package:config(option) and "ON" or "OFF"
         end
