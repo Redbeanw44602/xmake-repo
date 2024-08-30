@@ -11,7 +11,7 @@ package("lame")
 
     add_deps("nasm")
 
-    on_install("linux", "macosx", "bsd", function (package)
+    on_install("linux", "macosx", "bsd", "cross", function (package)
         local configs = {"--enable-nasm"}
         table.insert(configs, "--enable-shared=" .. (package:config("shared") and "yes" or "no"))
         if package:debug() then
