@@ -1,3 +1,5 @@
+-- from: https://github.com/xmake-io/xmake-repo/blob/master/packages/l/llvm
+
 function get_links(package)
     local links = {
         "LLVMIRReader",

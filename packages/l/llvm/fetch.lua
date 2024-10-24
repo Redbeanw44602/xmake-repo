@@ -1,3 +1,5 @@
+-- from: https://github.com/xmake-io/xmake-repo/blob/master/packages/l/llvm
+
 import("lib.detect.find_tool")
 import("core.project.target")
 

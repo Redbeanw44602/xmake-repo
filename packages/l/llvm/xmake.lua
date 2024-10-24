@@ -1,4 +1,4 @@
--- from: https://github.com/xmake-io/xmake-repo/blob/master/packages/l/llvm/xmake.lua
+-- from: https://github.com/xmake-io/xmake-repo/blob/master/packages/l/llvm
 
 --- synchronize the latest stable version.
 --- populate or update an older versions.
@@ -28,15 +28,15 @@ package("llvm")
     add_configs("libcxxabi",         {description = "Enable libcxxabi runtime.", default = true, type = "boolean"})
     add_configs("openmp",            {description = "Enable openmp runtime.", default = false, type = "boolean"})
 
-    package:set("urls", "https://github.com/llvm/llvm-project/releases/download/llvmorg-$(version)/llvm-project-$(version).src.tar.xz")
-    package:add("versions", "11.1.0", "74d2529159fd118c3eac6f90107b5611bccc6f647fdea104024183e8d5e25831")
-    package:add("versions", "12.0.1", "129cb25cd13677aad951ce5c2deb0fe4afc1e9d98950f53b51bdcfb5a73afa0e")
-    package:add("versions", "13.0.1", "326335a830f2e32d06d0a36393b5455d17dc73e0bd1211065227ee014f92cbf8")
-    package:add("versions", "14.0.6", "8b3cfd7bc695bd6cea0f37f53f0981f34f87496e79e2529874fd03a2f9dd3a8a")
-    package:add("versions", "15.0.7", "8b5fcb24b4128cf04df1b0b9410ce8b1a729cb3c544e6da885d234280dedeac6")
-    package:add("versions", "16.0.6", "ce5e71081d17ce9e86d7cbcfa28c4b04b9300f8fb7e78422b1feb6bc52c3028e")
-    package:add("versions", "17.0.6", "58a8818c60e6627064f312dbf46c02d9949956558340938b71cf731ad8bc0813")
-    package:add("versions", "18.1.8", "0b58557a6d32ceee97c8d533a59b9212d87e0fc4d2833924eb6c611247db2f2a")
+    set_urls("https://github.com/llvm/llvm-project/releases/download/llvmorg-$(version)/llvm-project-$(version).src.tar.xz")
+    add_versions("11.1.0", "74d2529159fd118c3eac6f90107b5611bccc6f647fdea104024183e8d5e25831")
+    add_versions("12.0.1", "129cb25cd13677aad951ce5c2deb0fe4afc1e9d98950f53b51bdcfb5a73afa0e")
+    add_versions("13.0.1", "326335a830f2e32d06d0a36393b5455d17dc73e0bd1211065227ee014f92cbf8")
+    add_versions("14.0.6", "8b3cfd7bc695bd6cea0f37f53f0981f34f87496e79e2529874fd03a2f9dd3a8a")
+    add_versions("15.0.7", "8b5fcb24b4128cf04df1b0b9410ce8b1a729cb3c544e6da885d234280dedeac6")
+    add_versions("16.0.6", "ce5e71081d17ce9e86d7cbcfa28c4b04b9300f8fb7e78422b1feb6bc52c3028e")
+    add_versions("17.0.6", "58a8818c60e6627064f312dbf46c02d9949956558340938b71cf731ad8bc0813")
+    add_versions("18.1.8", "0b58557a6d32ceee97c8d533a59b9212d87e0fc4d2833924eb6c611247db2f2a")
 
     on_load(function (package)
         if not package:is_plat("windows", "msys") then
