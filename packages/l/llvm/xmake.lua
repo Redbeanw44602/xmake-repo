@@ -1,10 +1,11 @@
 -- from: https://github.com/xmake-io/xmake-repo/blob/master/packages/l/llvm
 
---- synchronize the latest stable version.
---- populate or update an older versions.
+--- 1. update to latest version.
+--- 2. fix package kind.
+--- 3. fix test.
 
 package("llvm")
-    set_kind("toolchain")
+    set_kind("library")
     set_homepage("https://llvm.org/")
     set_description("The LLVM Compiler Infrastructure")
     add_configs("shared",            {description = "Build shared library.", default = false, type = "boolean", readonly = true})
@@ -37,6 +38,7 @@ package("llvm")
     add_versions("16.0.6", "ce5e71081d17ce9e86d7cbcfa28c4b04b9300f8fb7e78422b1feb6bc52c3028e")
     add_versions("17.0.6", "58a8818c60e6627064f312dbf46c02d9949956558340938b71cf731ad8bc0813")
     add_versions("18.1.8", "0b58557a6d32ceee97c8d533a59b9212d87e0fc4d2833924eb6c611247db2f2a")
+    add_versions("19.1.7", "82401fea7b79d0078043f7598b835284d6650a75b93e64b6f761ea7b63097501")
 
     on_load(function (package)
         if not package:is_plat("windows", "msys") then
@@ -53,15 +55,13 @@ package("llvm")
             end
         end
         -- add components
-        if package:is_library() then
-            local components = {"mlir", "clang", "libunwind"}
-            for _, name in ipairs(components) do
-                if package:config(name) or package:config("all") then
-                    package:add("components", name, {deps = "base"})
-                end
+        local components = {"mlir", "clang", "libunwind"}
+        for _, name in ipairs(components) do
+            if package:config(name) or package:config("all") then
+                package:add("components", name, {deps = "base"})
             end
-            package:add("components", "base", {default = true})
         end
+        package:add("components", "base", {default = true})
     end)
 
     on_fetch("fetch")
@@ -155,12 +155,11 @@ package("llvm")
     on_component("base",      "components.base")
 
     on_test(function (package)
-        if package:is_toolchain() and not package:is_cross() then
-            if not package:is_plat("windows") then
-                os.vrun("llvm-config --version")
-            end
-            if package:config("clang") then
-                os.vrun("clang --version")
-            end
-        end
+        assert(package:check_cxxsnippets({test = [[
+            #include <clang/Frontend/CompilerInstance.h>
+            int main(int argc, char** argv) {
+                clang::CompilerInstance instance;
+                return 0;
+            }
+        ]]}, {configs = {languages = 'c++17'}}))
     end)
